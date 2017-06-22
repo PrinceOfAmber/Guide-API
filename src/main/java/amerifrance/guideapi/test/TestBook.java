@@ -15,14 +15,17 @@ import com.google.common.collect.Maps;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import javax.annotation.Nullable;
 import java.awt.Color;
 import java.util.List;
@@ -50,6 +53,18 @@ public class TestBook implements IGuideBook {
         pages.add(new PageText("Hello, this is\nsome text"));
         pages.add(new PageFurnaceRecipe(Blocks.COBBLESTONE));
         pages.add(new PageIRecipe(new ShapedOreRecipe(new ResourceLocation("gi","test1"),Items.ACACIA_BOAT, "X X", "XXX", 'X', "plankWood")));
+        
+        pages.add(new PageIRecipe(new ShapelessOreRecipe(new ResourceLocation("gi","testshapeless"), 
+            new ItemStack(Blocks.IRON_BLOCK), 
+            "ingotIron", "ingotIron", "ingotIron",
+            "ingotIron", "ingotIron", "ingotIron",
+            "ingotIron", "ingotIron", "ingotIron")));
+        
+        NonNullList<Ingredient> ings = NonNullList.create();
+        ings.add(Ingredient.fromStacks(new ItemStack(Blocks.LOG)));
+        
+        pages.add(new PageIRecipe(new ShapelessRecipes("testshapeless", new ItemStack(Blocks.PLANKS, 4), ings)));
+        
         Entry entry = new EntryItemStack(pages, "test.entry.name", new ItemStack(Items.POTATO));
         entries.put(new ResourceLocation("guideapi", "entry"), entry);
 

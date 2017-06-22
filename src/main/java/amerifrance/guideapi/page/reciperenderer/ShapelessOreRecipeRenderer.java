@@ -23,16 +23,16 @@ public class ShapelessOreRecipeRenderer extends BasicRecipeRenderer<ShapelessOre
         super(recipe);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void draw(Book book, CategoryAbstract category, EntryAbstract entry, int guiLeft, int guiTop, int mouseX, int mouseY, GuiBase guiBase, FontRenderer fontRendererObj) {
         super.draw(book, category, entry, guiLeft, guiTop, mouseX, mouseY, guiBase, fontRendererObj);
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 int i = 3 * y + x;
-                    int stackX = (x + 1) * 17 + (guiLeft + 27) + x;
-                    int stackY = (y + 1) * 17 + (guiTop + 38) + y;
-                    
+                int stackX = (x + 1) * 17 + (guiLeft + 27) + x;
+                int stackY = (y + 1) * 17 + (guiTop + 38) + y;
+
+                if(i < recipe.getIngredients().size()) {
                     Object component = recipe.getIngredients().get(i);
                     if (component instanceof ItemStack) {
                         ItemStack input = (ItemStack) component;
@@ -55,6 +55,7 @@ public class ShapelessOreRecipeRenderer extends BasicRecipeRenderer<ShapelessOre
                                 tooltips = GuiHelper.getTooltip(stack);
                         }
                     }
+                }
             }
         }
     }

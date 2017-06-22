@@ -29,15 +29,16 @@ public class ShapelessRecipesRenderer extends BasicRecipeRenderer<ShapelessRecip
             for (int x = 0; x < 3; x++) {
                 int i = 3 * y + x;
                 
-                
-               // if (i < recipe.getRecipeSize()) {
+
+                if(i < recipe.recipeItems.size()) {
+
                     int stackX = (x + 1) * 17 + (guiLeft + 27) + x;
                     int stackY = (y + 1) * 17 + (guiTop + 38) + y;
-                    Ingredient ing =   recipe.recipeItems.get(i);
-                    if(ing.getMatchingStacks().length==0){continue;}
+                    Ingredient ing = recipe.recipeItems.get(i);
+                    if(ing.getMatchingStacks() == null || ing.getMatchingStacks().length ==0 ) { continue; }
+                    
                     ItemStack stack = ing.getMatchingStacks()[0];
                     
-                    //ItemStack stack = recipe.recipeItems.get(i);
                     if (!stack.isEmpty()) {
                         if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
                             stack = getNextItem(stack, x);
@@ -45,7 +46,7 @@ public class ShapelessRecipesRenderer extends BasicRecipeRenderer<ShapelessRecip
                         if (GuiHelper.isMouseBetween(mouseX, mouseY, stackX, stackY, 15, 15))
                             tooltips = GuiHelper.getTooltip(stack);
                     }
-               // }
+                }
             }
         }
     }

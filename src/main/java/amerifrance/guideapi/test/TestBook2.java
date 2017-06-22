@@ -3,8 +3,10 @@ package amerifrance.guideapi.test;
 import amerifrance.guideapi.api.GuideAPI;
 import amerifrance.guideapi.api.GuideBook;
 import amerifrance.guideapi.api.IGuideBook;
+import amerifrance.guideapi.api.IPage;
 import amerifrance.guideapi.api.impl.Book;
 import amerifrance.guideapi.api.impl.abstraction.CategoryAbstract;
+import amerifrance.guideapi.api.util.PageHelper;
 import amerifrance.guideapi.category.CategoryItemStack;
 import amerifrance.guideapi.entry.EntryItemStack;
 import amerifrance.guideapi.page.PageBrewingRecipe;
@@ -39,8 +41,8 @@ public class TestBook2 implements IGuideBook {
         book = new Book();
         book.setAuthor("TehNut");
         book.setColor(Color.GREEN);
-        book.setDisplayName("Display Name");
-        book.setTitle("Title message");
+        book.setDisplayName("Display Name 2");
+        book.setTitle("Title message 2");
         book.setWelcomeMessage("Is this still a thing?");
 
         CategoryAbstract testCategory = new CategoryItemStack("test.category.name", new ItemStack(Items.BANNER)).withKeyBase("guideapi");
@@ -52,6 +54,11 @@ public class TestBook2 implements IGuideBook {
             PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.AWKWARD),
             new ItemStack(Items.SPECKLED_MELON),
             PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.HEALING))));
+        
+        for(IPage page : PageHelper.pagesForLongText("Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  Hello this is very long text.  ", 200)) {
+            testCategory.getEntry("entry").addPage(page);
+        }
+        
         book.addCategory(testCategory);
 
         book.setRegistryName(new ResourceLocation("guideapi", "test_book2"));
