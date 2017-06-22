@@ -36,12 +36,9 @@ public class ShapedOreRecipeRenderer extends BasicRecipeRenderer<ShapedOreRecipe
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void draw(Book book, CategoryAbstract category, EntryAbstract entry, int guiLeft, int guiTop, int mouseX, int mouseY, GuiBase guiBase, FontRenderer fontRendererObj) {
         super.draw(book, category, entry, guiLeft, guiTop, mouseX, mouseY, guiBase, fontRendererObj);
-        
-      
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 int stackX = (x + 1) * 17 + (guiLeft + 27) + x;
@@ -68,7 +65,6 @@ public class ShapedOreRecipeRenderer extends BasicRecipeRenderer<ShapedOreRecipe
                             if (GuiHelper.isMouseBetween(mouseX, mouseY, stackX, stackY, 15, 15))
                                 tooltips = GuiHelper.getTooltip(stack);
                         }
-                   
                     }
                 }
             }
